@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "232045536454",
+    "project_id": "cultion-a348a",
+    "storage_bucket": "cultion-a348a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232045536454:android:bb17e9452935ebdd4fa3c7",
+        "android_client_info": {
+          "package_name": "com.example.cultino"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "232045536454-hqvovfvt078p4sa3g1eu0ohcd4q2glmg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKsvAZ7nUJ8BIy8eLWRY6NPukllKKN8Xc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "232045536454-hqvovfvt078p4sa3g1eu0ohcd4q2glmg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
