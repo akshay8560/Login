@@ -18,6 +18,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -37,6 +43,9 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 
@@ -58,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
     private StorageReference storageReference;
     FirebaseDatabase firebaseDatabase;
     FirebaseStorage storage;
+    String url="https://thekrishi.com/test/mandi?lat=28.44108136&lon=77.0526054&ver=89&lang=hi&crop_id=10";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         name=findViewById(R.id.name);
         email=findViewById(R.id.email);
         submit=findViewById(R.id.btn);
-
+        getData();
         userprofilephoto=findViewById(R.id.userprofilephoto);
         addphoto=findViewById(R.id.addphoto);
         firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
@@ -115,6 +125,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void getData() {
+        RequestQueue requestQueue= Volley.newRequestQueue(this);
+        JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                try {
+                    Toast.makeText(MainActivity.this, "code:"+response.getInt("code")
+                            +"," +"data :"+response.get("data"), Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(MainActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        requestQueue.add(jsonObjectRequest);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
